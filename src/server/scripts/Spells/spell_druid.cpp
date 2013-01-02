@@ -33,13 +33,13 @@ enum DruidSpells
     DRUID_GENESIS_R2                    = 57811,
     DRUID_GENESIS_R3                    = 57812,
 
-    DRUID_NPC_WILD_MUSHROOM             = 47649,
+    DRUID_NPC_WILD_MUSHROOM             = 88747,
     DRUID_TALENT_FUNGAL_GROWTH_1        = 78788,
     DRUID_TALENT_FUNGAL_GROWTH_2        = 78789,
     DRUID_NPC_FUNGAL_GROWTH_1           = 81291,
     DRUID_NPC_FUNGAL_GROWTH_2           = 81283,
     DRUID_SPELL_WILD_MUSHROOM_SUICIDE   = 92853,
-    DRUID_SPELL_WILD_MUSHROOM_DAMAGE    = 78777,
+    DRUID_SPELL_WILD_MUSHROOM_DAMAGE    = 88751,
 };
 
 // 54846 Glyph of Starfire
@@ -500,15 +500,15 @@ public:
                 if ((int32)list.size() >= spell->Effects[effIndex].BasePoints) // Max 3
                     list.front()->ToTempSummon()->UnSummon();
 
-				Position pos;
-				GetCaster()->GetPosition(&pos);
+                Position pos;
+                GetCaster()->GetPosition(&pos);
                 const SummonPropertiesEntry* properties = sSummonPropertiesStore.LookupEntry(spell->Effects[effIndex].MiscValueB);
                 TempSummon* summon = player->SummonCreature(spell->Effects[0].MiscValue, pos, TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN);
                 
-				if (!summon)
+                if (!summon)
                     return;
                 
-				summon->SetUInt64Value(UNIT_FIELD_SUMMONEDBY, player->GetGUID());
+                summon->SetUInt64Value(UNIT_FIELD_SUMMONEDBY, player->GetGUID());
                 summon->setFaction(player->getFaction());
                 summon->SetUInt32Value(UNIT_CREATED_BY_SPELL, GetSpellInfo()->Id);
                 summon->SetMaxHealth(5);
@@ -539,7 +539,7 @@ class spell_druid_wild_mushroom_detonate : public SpellScriptLoader
 
             // Global variables
             float spellRange;
-			SpellRangeEntry const* RangeEntry;
+            SpellRangeEntry const* RangeEntry;
             std::list<TempSummon*> mushroomList;
 
             bool Load()
