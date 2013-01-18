@@ -1388,7 +1388,11 @@ void Spell::EffectDummy(SpellEffIndex effIndex)
 
             // Wild mushroom: detonate (prepare this to move to scripting).
             // summoned npc may need further scripting.
+<<<<<<< HEAD
             /*if (m_spellInfo->Id == 88751)
+=======
+            if (m_spellInfo->Id == 88751)
+>>>>>>> c61535308f62ac23b9da0eee2b2b670026812a52
             {
                 std::list<Creature*> templist;
 
@@ -1425,7 +1429,11 @@ void Spell::EffectDummy(SpellEffIndex effIndex)
                         }
                     }
                     templist.clear();
+<<<<<<< HEAD
             }*/
+=======
+            }
+>>>>>>> c61535308f62ac23b9da0eee2b2b670026812a52
             break;
         }
         case SPELLFAMILY_PALADIN:
@@ -1663,7 +1671,11 @@ void Spell::EffectDummy(SpellEffIndex effIndex)
     m_caster->GetMap()->ScriptsStart(sSpellScripts, uint32(m_spellInfo->Id | (effIndex << 24)), m_caster, unitTarget);
 
     // Script based implementation. Must be used only for not good for implementation in core spell effects
+<<<<<<< HEAD
     // So called only for not processed cases
+=======
+    // So called only for not proccessed cases
+>>>>>>> c61535308f62ac23b9da0eee2b2b670026812a52
     if (gameObjTarget)
         sScriptMgr->OnDummyEffect(m_caster, m_spellInfo->Id, effIndex, gameObjTarget);
     else if (unitTarget && unitTarget->GetTypeId() == TYPEID_UNIT)

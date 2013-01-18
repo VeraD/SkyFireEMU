@@ -98,13 +98,13 @@ public:
     }
 
     // Triggering corpses expire check in world
-    static bool HandleServerCorpsesCommand(ChatHandler* handler, char const* args)
+    static bool HandleServerCorpsesCommand(ChatHandler* /*handler*/, char const* /*args*/)
     {
         sObjectAccessor->RemoveOldCorpses();
         return true;
     }
 
-    static bool HandleServerInfoCommand(ChatHandler* handler, char const* args)
+    static bool HandleServerInfoCommand(ChatHandler* handler, char const* /*args*/)
     {
         uint32 playersNum = sWorld->GetPlayerCount();
         uint32 maxPlayersNum = sWorld->GetMaxPlayerCount();
@@ -118,6 +118,7 @@ public:
         handler->PSendSysMessage(_CLIENT_BUILD_REVISION_2);
         handler->PSendSysMessage("Revision Hash: "_HASH);
         handler->PSendSysMessage("Build Date: "_DATE);
+        handler->PSendSysMessage("Using World DB: %s", sWorld->GetDBVersion());
         handler->PSendSysMessage(LANG_CONNECTED_PLAYERS, playersNum, maxPlayersNum);
         handler->PSendSysMessage(LANG_CONNECTED_USERS, activeClientsNum, maxActiveClientsNum, queuedClientsNum, maxQueuedClientsNum);
         handler->PSendSysMessage(LANG_UPTIME, uptime.c_str());
@@ -129,7 +130,7 @@ public:
         return true;
     }
     // Display the 'Message of the day' for the realm
-    static bool HandleServerMotdCommand(ChatHandler* handler, char const* args)
+    static bool HandleServerMotdCommand(ChatHandler* handler, char const* /*args*/)
     {
         handler->PSendSysMessage(LANG_MOTD_CURRENT, sWorld->GetMotd());
         return true;
@@ -184,13 +185,13 @@ public:
         return true;
     }
 
-    static bool HandleServerShutDownCancelCommand(ChatHandler* handler, char const* args)
+    static bool HandleServerShutDownCancelCommand(ChatHandler* /*handler*/, char const* /*args*/)
     {
         sWorld->ShutdownCancel();
         return true;
     }
 
-    static bool HandleServerShutDownCommand(ChatHandler* handler, char const* args)
+    static bool HandleServerShutDownCommand(ChatHandler* /*handler*/, char const* args)
     {
         if (!*args)
         return false;
@@ -225,7 +226,7 @@ public:
         return true;
     }
 
-    static bool HandleServerRestartCommand(ChatHandler* handler, char const* args)
+    static bool HandleServerRestartCommand(ChatHandler* /*handler*/, char const* args)
     {
         if (!*args)
             return false;
@@ -260,7 +261,7 @@ public:
             return true;
     }
 
-    static bool HandleServerIdleRestartCommand(ChatHandler* handler, char const* args)
+    static bool HandleServerIdleRestartCommand(ChatHandler* /*handler*/, char const* args)
     {
         if (!*args)
             return false;
@@ -295,7 +296,7 @@ public:
             return true;
     }
 
-    static bool HandleServerIdleShutDownCommand(ChatHandler* handler, char const* args)
+    static bool HandleServerIdleShutDownCommand(ChatHandler* /*handler*/, char const* args)
     {
         if (!*args)
             return false;
@@ -331,7 +332,7 @@ public:
     }
 
     // Exit the realm
-    static bool HandleServerExitCommand(ChatHandler* handler, char const* args)
+    static bool HandleServerExitCommand(ChatHandler* handler, char const* /*args*/)
     {
         handler->SendSysMessage(LANG_COMMAND_EXIT);
         World::StopNow(SHUTDOWN_EXIT_CODE);
@@ -368,7 +369,7 @@ public:
     }
 
     // Set the level of logging
-    static bool HandleServerSetLogFileLevelCommand(ChatHandler* handler, char const* args)
+    static bool HandleServerSetLogFileLevelCommand(ChatHandler* /*handler*/, char const* args)
     {
         if (!*args)
             return false;
@@ -382,7 +383,7 @@ public:
     }
 
     // Set the level of logging
-    static bool HandleServerSetLogLevelCommand(ChatHandler* handler, char const* args)
+    static bool HandleServerSetLogLevelCommand(ChatHandler* /*handler*/, char const* args)
     {
         if (!*args)
             return false;
@@ -396,7 +397,7 @@ public:
     }
 
     // set diff time record interval
-    static bool HandleServerSetDiffTimeCommand(ChatHandler* handler, char const* args)
+    static bool HandleServerSetDiffTimeCommand(ChatHandler* /*handler*/, char const* args)
     {
         if (!*args)
             return false;
@@ -415,7 +416,7 @@ public:
     }
 
     // toggle sql driver query logging
-    static bool HandleServerToggleQueryLogging(ChatHandler* handler,const char* args )
+    static bool HandleServerToggleQueryLogging(ChatHandler* handler,const char* /*args*/)
     {
         sLog->SetSQLDriverQueryLogging(!sLog->GetSQLDriverQueryLogging());
         if (sLog->GetSQLDriverQueryLogging())

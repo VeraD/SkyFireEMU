@@ -164,7 +164,7 @@ public:
 
         void Reset() {}
 
-        void UpdateAI(const uint32 diff)
+        void UpdateAI(const uint32 /*diff*/)
         {
             Unit* target = NULL;
             target = me->SelectNearestTarget(5.0f);
@@ -182,6 +182,6 @@ public:
 
 void AddSC_kezan()
 {
-    new npc_fourth_and_goal_target;
-    new npc_defiant_troll;
+    new npc_fourth_and_goal_target();
+    new npc_defiant_troll();
 }

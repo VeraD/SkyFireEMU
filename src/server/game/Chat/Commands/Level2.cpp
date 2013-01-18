@@ -434,23 +434,23 @@ bool ChatHandler::HandlePInfoCommand(const char* args)
     AreaTableEntry const* area = GetAreaEntryByAreaID(areaId);
     if (area)
     {
-        areaName = area->area_name[locale];
+        areaName = area->area_name;
 
         AreaTableEntry const* zone = GetAreaEntryByAreaID(area->zone);
 
         if (zone)
-            zoneName = zone->area_name[locale];
+            zoneName = zone->area_name;
     }
 
     if (target)
     {
         if (!zoneName.empty())
-            PSendSysMessage(LANG_PINFO_MAP_ONLINE, map->name[locale], zoneName.c_str(), areaName.c_str(), phase);
+            PSendSysMessage(LANG_PINFO_MAP_ONLINE, map->name, zoneName.c_str(), areaName.c_str(), phase);
         else
-            PSendSysMessage(LANG_PINFO_MAP_ONLINE, map->name[locale], areaName.c_str(), "<unknown>", phase);
+            PSendSysMessage(LANG_PINFO_MAP_ONLINE, map->name, areaName.c_str(), "<unknown>", phase);
     }
     else
-        PSendSysMessage(LANG_PINFO_MAP_OFFLINE, map->name[locale], areaName.c_str());
+        PSendSysMessage(LANG_PINFO_MAP_OFFLINE, map->name, areaName.c_str());
 
     return true;
 }
@@ -628,7 +628,7 @@ bool ChatHandler::LookupPlayerSearchCommand(PreparedQueryResult result, int32 li
             do
             {
                 Field* charfields = result2->Fetch();
-                guid = charfields[0].GetUInt64();
+                guid = charfields[0].GetUInt32();
                 name = charfields[1].GetString();
 
                 PSendSysMessage(LANG_LOOKUP_PLAYER_CHARACTER, name.c_str(), guid);

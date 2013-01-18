@@ -568,14 +568,14 @@ void WorldSession::KickPlayer()
         m_Socket->CloseSocket();
 }
 
-void WorldSession::HandleMoveToGraveyard(WorldPacket &recvData)
+void WorldSession::HandleMoveToGraveyard(WorldPacket& /*recvData*/)
 {
    if (_player->isAlive() || !_player->HasFlag(PLAYER_FLAGS, PLAYER_FLAGS_GHOST))
        return;
    _player->RepopAtGraveyard();
 }
 
-void WorldSession::SendNotification(const char *format, ...)
+void WorldSession::SendNotification(const char* format, ...)
 {
     if (format)
     {
@@ -698,7 +698,7 @@ void WorldSession::SetAccountData(AccountDataType type, time_t time_, std::strin
     if ((1 << type) & GLOBAL_CACHE_MASK)
     {
         id = GetAccountId();
-        index = CHAR_UPD_ACCOUNT_DATA;
+        index = CHAR_REP_ACCOUNT_DATA;
     }
     else
     {
@@ -707,7 +707,7 @@ void WorldSession::SetAccountData(AccountDataType type, time_t time_, std::strin
             return;
 
         id = m_GUIDLow;
-        index = CHAR_UPD_PLAYER_ACCOUNT_DATA;
+        index = CHAR_REP_PLAYER_ACCOUNT_DATA;
     }
 
     PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(index);

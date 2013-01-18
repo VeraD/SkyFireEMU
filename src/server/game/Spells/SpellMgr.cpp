@@ -36,13 +36,13 @@
 bool IsPrimaryProfessionSkill(uint32 skill)
 {
     SkillLineEntry const *pSkill = sSkillLineStore.LookupEntry(skill);
-    if (!pSkill)
-        return false;
+    return pSkill && pSkill->categoryId == SKILL_CATEGORY_PROFESSION;
+}
 
-    if (pSkill->categoryId != SKILL_CATEGORY_PROFESSION)
-        return false;
-
-    return true;
+bool IsWeaponSkill(uint32 skill)
+{
+    SkillLineEntry const* pSkill = sSkillLineStore.LookupEntry(skill);
+    return pSkill && pSkill->categoryId == SKILL_CATEGORY_WEAPON;
 }
 
 bool IsPartOfSkillLine(uint32 skillId, uint32 spellId)
@@ -2839,7 +2839,7 @@ void SpellMgr::UnloadSpellInfoStore()
     }
     mSpellInfoMap.clear();
 }
-/*
+
 void SpellMgr::UnloadSpellInfoImplicitTargetConditionLists()
 {
     for (uint32 i = 0; i < mSpellInfoMap.size(); ++i)
@@ -2848,7 +2848,7 @@ void SpellMgr::UnloadSpellInfoImplicitTargetConditionLists()
             mSpellInfoMap[i]->_UnloadImplicitTargetConditionLists();
     }
 }
-*/
+
 void SpellMgr::LoadSpellCustomAttr()
 {
     uint32 oldMSTime = getMSTime();
